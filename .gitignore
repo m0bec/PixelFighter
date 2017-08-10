@@ -69,3 +69,5 @@ sysinfo.txt #Unity3D Generated File On Crash Reports
 *.meta
 *.unity
 *.json
+*.exe
+PixelGameFighter/PixelFighter_Data

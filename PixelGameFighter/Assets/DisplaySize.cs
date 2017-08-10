@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DisplaySize : MonoBehaviour {
-	int width, height;
+	
+	public int width, height;
 	// Use this for initialization
 	void Start () {
 		width = Screen.width;
@@ -11,7 +12,13 @@ public class DisplaySize : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	
+
+	public int GetWidth(){
+		return width;
+	}
+
+	public int GetHeight(){
+		return height;
 	}
 }
