@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SelectMenueState : MonoBehaviour {
+	public enum MenueType{
+		Main
+	};
+	int menue_type;
 	int menue_state;
 	// Use this for initialization
 	void Start () {
 		menue_state = 0;
-
+		menue_type = (int)MenueType.Main;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		ChangeMenueState();
+		if(menue_type == (int)MenueType.Main){
+			ChangeMenueState();
+		}
 	}
 
 	public int GetMenueState(){
@@ -31,5 +37,9 @@ public class SelectMenueState : MonoBehaviour {
 		}else if(menue_state < (int)MenueStateEnum.StateName.Start){
 			menue_state = (int)MenueStateEnum.StateName.Exit;
 		}
+	}
+
+	public void SetMainMenueStateFlag(int menue_type_){
+		menue_type = menue_type_;
 	}
 }

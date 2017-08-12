@@ -16,8 +16,15 @@ public class TextExit : SText {
 		base.Update();
 		if(select_menue_system.GetMenueState() == base.GetStateNum()){
 			this.GetComponent<Text>().color = base.select_color;
+			SelectAction();
 		}else{
 			this.GetComponent<Text>().color = base.not_select_color;
+		}
+	}
+
+	void SelectAction(){
+		if(Input.GetKeyDown(KeyCode.KeypadEnter)){
+			Application.Quit();
 		}
 	}
 }
