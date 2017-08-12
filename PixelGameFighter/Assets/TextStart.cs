@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TextStart : SText {
-	public GameObject obj;
+	public MenueStateEnum menue_state_enum;
 	// Use this for initialization
-	void Start () {
-		base.SetStateNum(0);
+	public override void Start () {
+		base.Start();
+		base.SetStateNum((int)MenueStateEnum.StateName.Start);
 	}
 	
 	// Update is called once per frame
