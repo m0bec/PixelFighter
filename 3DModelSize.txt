@@ -1,0 +1,5 @@
+MagicalVoxel 20 20 20
+|
+blender 100
+|
+Unity 0.0002 0.0002 0.0002
