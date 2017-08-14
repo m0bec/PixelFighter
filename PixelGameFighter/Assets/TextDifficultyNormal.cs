@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class TextDifficultyNormal : SStartSelectMenueText {
-	GamemodeDataKeeper gamemode_data_keeper = GamemodeDataKeeper.Instance;
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
@@ -25,8 +24,8 @@ public class TextDifficultyNormal : SStartSelectMenueText {
 
 	void SelectAction(){
 		if(Input.GetKeyDown(KeyCode.Return)){
-			gamemode_data_keeper.Difficulty = (int)StartSelectMenueSystem.DifficultyState.Normal;
-			SceneManager.LoadScene("GameModeOne");
+			base.gamemode_data_keeper.Difficulty = (int)StartSelectMenueSystem.DifficultyState.Normal;
+			SceneManager.LoadScene(base.GameModeSceneName);
 		}
 	}
 }

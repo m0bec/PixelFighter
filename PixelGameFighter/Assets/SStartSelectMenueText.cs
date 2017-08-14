@@ -8,6 +8,7 @@ public class SStartSelectMenueText : MonoBehaviour {
 	public StartSelectMenueSystem select_menue_system;
 
 	public string GameModeSceneName = "GameModeOne";
+	public GamemodeDataKeeper gamemode_data_keeper = GamemodeDataKeeper.Instance;
 
 	public Color select_color = new Color(0f / 255f, 0f / 255f, 0f / 255f);
 	public Color not_select_color = new Color(96f / 255f, 88f / 255f, 88f / 255f);
