@@ -7,6 +7,8 @@ public class SStartSelectMenueText : MonoBehaviour {
 	GameObject start_select_menue_system;
 	public StartSelectMenueSystem select_menue_system;
 
+	public string GameModeSceneName = "GameModeOne";
+
 	public Color select_color = new Color(0f / 255f, 0f / 255f, 0f / 255f);
 	public Color not_select_color = new Color(96f / 255f, 88f / 255f, 88f / 255f);
 	// Use this for initialization
