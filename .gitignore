@@ -71,3 +71,10 @@ sysinfo.txt #Unity3D Generated File On Crash Reports
 *.json
 *.exe
 PixelGameFighter/PixelFighter_Data
+*.obj
+*.mtl
+*.vox
+*.blend
+*.blend1
+*.mat
+*.fbx
