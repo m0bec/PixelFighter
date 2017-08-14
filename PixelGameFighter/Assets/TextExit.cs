@@ -23,7 +23,7 @@ public class TextExit : SText {
 	}
 
 	void SelectAction(){
-		if(Input.GetKeyDown(KeyCode.KeypadEnter)){
+		if(Input.GetKeyDown(KeyCode.Return)){
 			Application.Quit();
 		}
 	}
