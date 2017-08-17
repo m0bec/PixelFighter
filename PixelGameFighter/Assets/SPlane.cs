@@ -3,11 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SPlane : MonoBehaviour {
-	Vector3 size;
+	public Vector3 size;
+	public Vector3 Size{
+		get{return size;}
+	}
+	Quaternion rotate;
+	public Quaternion Rotate{
+		get{return rotate;}
+	}
+	public float width, height;
+	public float Width{
+		get{return width;}
+	}
+	public float Height{
+		get{return height;}
+	}
 	const float move_speed = 5.0f;
 	// Use this for initialization
 	public virtual void Start () {
 		size = this.transform.position;
+		width = this.GetComponent<Renderer>().bounds.size.x;
+		height = this.GetComponent<Renderer>().bounds.size.y;
+		rotate = this.transform.rotation;
 	}
 	
 	// Update is called once per frame
