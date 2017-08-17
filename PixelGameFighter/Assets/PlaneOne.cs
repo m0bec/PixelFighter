@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlaneOne : SPlane {
 	GameFrame game_frame;
 	bool create_flag = false;
-	const float margin = 100.0f;
+	const float margin = 400.0f;
 	Vector3 this_plane_size;
 	public Vector3 ThisPlaneSize{
 		get{return this_plane_size;}
@@ -22,10 +22,10 @@ public class PlaneOne : SPlane {
 	// Update is called once per frame
 	public override void Update () {
 		base.Update();
-		if(this.transform.position.y < -scroll_system.PlanePosition.y && !create_flag){
+		if(this.transform.position.y < -scroll_system.PlanePosition.y + margin && !create_flag){
 			Instantiate(
 				this,
-				new Vector3(scroll_system.PlanePosition.x, scroll_system.PlanePosition.y + game_frame.Height, scroll_system.PlanePosition.z),
+				new Vector3(scroll_system.PlanePosition.x, scroll_system.PlanePosition.y + game_frame.Height + margin, scroll_system.PlanePosition.z),
 				base.Rotate);
 			create_flag = true;
 		}
