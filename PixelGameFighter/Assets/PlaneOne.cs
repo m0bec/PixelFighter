@@ -22,10 +22,10 @@ public class PlaneOne : SPlane {
 	// Update is called once per frame
 	public override void Update () {
 		base.Update();
-		if(this.transform.position.y < -scroll_system.PlanePosition.y + margin && !create_flag){
+		if(this.transform.position.y < -base.Height/2 + game_frame.Height + margin && !create_flag){
 			Instantiate(
 				this,
-				new Vector3(scroll_system.PlanePosition.x, scroll_system.PlanePosition.y + game_frame.Height + margin, scroll_system.PlanePosition.z),
+				new Vector3(scroll_system.PlanePosition.x, this.transform.position.y + base.Height, scroll_system.PlanePosition.z),
 				base.Rotate);
 			create_flag = true;
 		}
