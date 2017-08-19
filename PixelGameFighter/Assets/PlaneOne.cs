@@ -10,12 +10,10 @@ public class PlaneOne : SPlane {
 	public Vector3 ThisPlaneSize{
 		get{return this_plane_size;}
 	}
-	StageOneScrollSystem scroll_system;
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
 		game_frame = GameObject.Find("GameFrame").GetComponent<GameFrame>();
-		scroll_system = GameObject.Find("StageOneScrollSystem").GetComponent<StageOneScrollSystem>();
 		this_plane_size = base.Size;
 	}
 	
@@ -25,7 +23,7 @@ public class PlaneOne : SPlane {
 		if(this.transform.position.y < -base.Height/2 + game_frame.Height + margin && !create_flag){
 			Instantiate(
 				this,
-				new Vector3(scroll_system.PlanePosition.x, this.transform.position.y + base.Height, scroll_system.PlanePosition.z),
+				new Vector3(this.transform.position.x, this.transform.position.y + base.Height, this.transform.position.z),
 				base.Rotate);
 			create_flag = true;
 		}
