@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameFrame : MonoBehaviour {
-	const float GAME_DISP_WIDTH = 400.0f;
-	public float GameDispWidth{
-		get{return GAME_DISP_WIDTH;}
+	const float GAME_DISP_WIDTH_L = -280.0f;
+	public float GameDispWidthL{
+		get{return GAME_DISP_WIDTH_L;}
 	}
-	const float GAME_DISP_HEIGHT = 360.0f;
-	public float GameDispHeight{
-		get{return GAME_DISP_HEIGHT;}
+	const float GAME_DISP_WIDTH_R = 120.0f;
+	public float GameDispWidthR{
+		get{return GAME_DISP_WIDTH_R;}
+	}
+	const float GAME_DISP_HEIGHT_U = 200.0f;
+	public float GameDispHeightU{
+		get{return GAME_DISP_HEIGHT_U;}
+	}
+	const float GAME_DISP_HEIGHT_D = -160.0f;
+	public float GameDispHeightD{
+		get{return GAME_DISP_HEIGHT_D;}
 	}
 	
 	public float width, height;
