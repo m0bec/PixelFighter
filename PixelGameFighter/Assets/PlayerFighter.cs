@@ -3,6 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFighter : MonoBehaviour {
+	static PlayerFighter instance;
+
+	PlayerFighter(){}
+
+	void Awake(){
+		if(instance == null){
+			instance = this;
+			DontDestroyOnLoad(gameObject);
+		}else{
+			Destroy(gameObject);
+		}
+	}
+
 	GameFrame game_frame;
 	GameObject fighter;
 	const float MOVE_NORMAL_SPEED = 4.0f;
