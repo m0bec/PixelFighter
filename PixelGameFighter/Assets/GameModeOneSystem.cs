@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameModeOneSystem : MonoBehaviour {
-
+	public GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
 	// Use this for initialization
 	void Start () {
 		

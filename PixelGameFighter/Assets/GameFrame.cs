@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameFrame : MonoBehaviour {
+	static GameFrame instance;
+	GameFrame(){}
+	void Awake(){
+		if(instance == null){
+			instance = this;
+			DontDestroyOnLoad(gameObject);
+		}else{
+			Destroy(gameObject);
+		}
+	}
+
 	const float GAME_DISP_WIDTH_L = -308.0f;
 	public float GameDispWidthL{
 		get{return GAME_DISP_WIDTH_L;}

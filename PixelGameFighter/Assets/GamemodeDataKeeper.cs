@@ -23,4 +23,12 @@ public class GamemodeDataKeeper {
 		set{difficulty = value;}
 		get{return difficulty;}
 	}
+
+    int score = 0;
+    public int Score{
+        get{return score;}
+        set{score = value;}
+    }
+    int high_score;
+    
 }
