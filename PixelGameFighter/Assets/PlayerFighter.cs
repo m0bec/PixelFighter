@@ -22,17 +22,92 @@ public class PlayerFighter : MonoBehaviour {
 	Vector3 next_position;
 	public float width;
 	public float height;
+	Vector3 DEF_START_POS = new Vector3(-54.0f, -300.0f, -10.0f);
 	// Use this for initialization
 	void Start () {
 		fighter = transform.Find("Fighter").gameObject;
 		game_frame = GameObject.Find("GameFrame").GetComponent<GameFrame>();
 		GetObjecSize();
+		this.transform.position = DEF_START_POS;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Move();
-		Shot();
+		if(control_flag){
+			Move();
+			Shot();
+		}else{
+			StartMovie();
+		}
+	}
+
+	bool control_flag = false;
+	void CanControl(){
+
+	}
+
+	const float bord_go_step_two = 0.0f;
+	const float bord_go_step_three = -150.0f;
+	const float bord_go_step_four = 400.0f;
+	const float bord_go_step_control = -150.0f;
+	const float ROLLING_SPEED = 10.0f;
+	enum start_step_num{
+		one, two, three, four
+	}
+	int start_step = (int)start_step_num.one;
+	bool start_step_one = false;
+	Vector3 start_movie_pos;
+	void StartMovie(){
+		switch(start_step){
+			case (int)start_step_num.one:
+				start_movie_pos = this.transform.position;
+				start_movie_pos.y += 5.0f;
+				this.transform.position = start_movie_pos;
+				if(start_movie_pos.y > bord_go_step_two){
+					start_step = (int)start_step_num.two;
+				}
+				break;
+
+			case (int)start_step_num.two:
+				start_movie_pos = this.transform.position;
+				start_movie_pos.y -= 3.0f;
+				this.transform.position = start_movie_pos;
+				this.transform.Rotate(new Vector3(0.0f, ROLLING_SPEED, 0.0f));
+				if(start_movie_pos.y < bord_go_step_three){
+					start_step = (int)start_step_num.three;
+				}
+				break;
+
+			case (int)start_step_num.three:
+				start_movie_pos = this.transform.position;
+				start_movie_pos.y += 15.0f;
+				this.transform.position = start_movie_pos;
+				if(start_movie_pos.y > bord_go_step_four){
+					start_step = (int)start_step_num.four;
+				}
+				break;
+			
+			case (int)start_step_num.four:
+				start_movie_pos = this.transform.position;
+				start_movie_pos.y -= 2.0f;
+				this.transform.position = start_movie_pos;
+				if(start_movie_pos.y < bord_go_step_control){
+					start_step = (int)start_step_num.one;
+					control_flag = true;
+				}
+				break;
+		}
+
+		if(start_step > (int)start_step_num.two && this.transform.rotation.eulerAngles.y != 0.0f){
+			if(Mathf.Abs(this.transform.rotation.eulerAngles.y) < ROLLING_SPEED){
+				Quaternion str_rotate = this.transform.rotation;
+				str_rotate.eulerAngles = new Vector3(0.0f, 0.0f, 180.0f);;
+				this.transform.rotation = str_rotate;
+			}else{
+				this.transform.Rotate(new Vector3(0.0f, ROLLING_SPEED, 0.0f));
+			}
+		}
+		
 	}
 
 	void GetObjecSize(){
