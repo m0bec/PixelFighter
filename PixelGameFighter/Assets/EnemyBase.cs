@@ -29,13 +29,19 @@ public class EnemyBase : MonoBehaviour {
 		
 	}
 	
+	bool in_field;
+	public bool InField{
+		set{in_field = value;}
+	}
 	public void OnTriggerEnter2D(Collider2D col){
-		if(col.gameObject.CompareTag("Bullet")){
-			Damage(col.gameObject.GetComponent<Shot>().Damage);
-			Destroy(col.gameObject);
-			if(hp <= 0){
-				game_mode_data_keeper.Score = game_mode_data_keeper.Score + score;
-				Destroy(this.gameObject);
+		if(in_field){
+			if(col.gameObject.CompareTag("Bullet")){
+				Damage(col.gameObject.GetComponent<Shot>().Damage);
+				Destroy(col.gameObject);
+				if(hp <= 0){
+					game_mode_data_keeper.Score = game_mode_data_keeper.Score + score;
+					Destroy(this.gameObject);
+				}
 			}
 		}
 	}

@@ -18,6 +18,11 @@ public class GamemodeDataKeeper {
         }
     }
 
+    const float PLAYER_FL = -10.0f;
+    public float PlayerFL{
+        get{return PLAYER_FL;}
+    }
+
 	int difficulty;
     public int Difficulty{
 		set{difficulty = value;}
