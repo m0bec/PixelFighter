@@ -14,5 +14,6 @@ public class ETBox : EnemyBase {
 	// Update is called once per frame
 	public override void Update () {
 		this.transform.Rotate(new Vector3(0.0f, TURN_SPEED, 0.0f));
+		
 	}
 }
