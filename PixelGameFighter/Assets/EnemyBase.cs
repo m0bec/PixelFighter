@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 public class EnemyBase : MonoBehaviour {
-	float hp{
+	public float hp;
+	public float Hp{
 		get{return hp;}
 		set{hp = value;}
 	}
@@ -12,7 +12,8 @@ public class EnemyBase : MonoBehaviour {
 		hp -= damage_;
 	}
 
-	int score{
+	int score;
+	public int Score{
 		get{return score;}
 		set{score = value;}
 	}
@@ -28,9 +29,9 @@ public class EnemyBase : MonoBehaviour {
 		
 	}
 	
-	void OnTriggerEnter2D(Collider2D col){
-		if(col.gameObject.CompareTag("BulletOne")){
-			Damage(col.gameObject.GetComponent<ShotOne>().Damage);
+	public void OnTriggerEnter2D(Collider2D col){
+		if(col.gameObject.CompareTag("Bullet")){
+			Damage(col.gameObject.GetComponent<Shot>().Damage);
 			Destroy(col.gameObject);
 			if(hp <= 0){
 				game_mode_data_keeper.Score = game_mode_data_keeper.Score + score;
