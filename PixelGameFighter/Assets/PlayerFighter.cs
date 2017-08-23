@@ -33,7 +33,7 @@ public class PlayerFighter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(control_flag){
+		if(game_mode_data_keeper.StartMovieFin){
 			Move();
 			Shot();
 		}else{
@@ -41,10 +41,7 @@ public class PlayerFighter : MonoBehaviour {
 		}
 	}
 
-	bool control_flag = false;
-	void CanControl(){
-
-	}
+	public GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
 
 	const float bord_go_step_two = 0.0f;
 	const float bord_go_step_three = -150.0f;
@@ -56,7 +53,7 @@ public class PlayerFighter : MonoBehaviour {
 	}
 	int start_step = (int)start_step_num.one;
 	bool start_step_one = false;
-	Vector3 start_movie_pos;
+	Vector3 start_movie_pos;	
 	void StartMovie(){
 		switch(start_step){
 			case (int)start_step_num.one:
@@ -93,7 +90,7 @@ public class PlayerFighter : MonoBehaviour {
 				this.transform.position = start_movie_pos;
 				if(start_movie_pos.y < bord_go_step_control){
 					start_step = (int)start_step_num.one;
-					control_flag = true;
+					game_mode_data_keeper.StartMovieFin = true;
 				}
 				break;
 		}

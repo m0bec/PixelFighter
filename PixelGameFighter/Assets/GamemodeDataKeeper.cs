@@ -30,5 +30,11 @@ public class GamemodeDataKeeper {
         set{score = value;}
     }
     int high_score;
+
+    bool start_movie_fin = false;
+    public bool StartMovieFin{
+        get{return start_movie_fin;}
+        set{start_movie_fin  =value;}
+    }
     
 }
