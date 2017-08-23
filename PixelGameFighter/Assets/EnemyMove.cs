@@ -28,9 +28,9 @@ public class EnemyMove : MonoBehaviour {
 	void Move(){
 		str_pos = this.transform.position;
 		if(!in_field){
-			if(CheckIn())	in_field = true;
+			if(CheckIn(0.0f, 0.0f))	in_field = true;
 		}else{
-			if(!CheckIn())	Destroy(this.gameObject);
+			if(!CheckIn(width, height))	Destroy(this.gameObject);
 		}
 		switch(move_num){
 			case (int)MOVE_NUM.straight_down:
@@ -40,11 +40,11 @@ public class EnemyMove : MonoBehaviour {
 		}
 	}
 
-	bool CheckIn(){
-		if(str_pos.x <= game_frame.GameDispWidthR - width/2 &&
-		str_pos.x >= game_frame.GameDispWidthL + width/2 &&
-		str_pos.y <= game_frame.GameDispHeightU - height/2 &&
-		str_pos.y <= game_frame.GameDispHeightD + height/2){
+	bool CheckIn(float margine_x_, float margine_y_){
+		if(str_pos.x <= game_frame.GameDispWidthR - width/2 + margine_x_ &&
+		str_pos.x >= game_frame.GameDispWidthL + width/2 - margine_x_ &&
+		str_pos.y <= game_frame.GameDispHeightU - height/2  + margine_y_ &&
+		str_pos.y >= game_frame.GameDispHeightD + height/2 - margine_y_){
 			return true;		
 		}else{
 			return false;
