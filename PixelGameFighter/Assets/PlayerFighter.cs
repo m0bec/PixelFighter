@@ -145,7 +145,7 @@ public class PlayerFighter : MonoBehaviour {
 	const float SHOT_RIGHT = 10.0f;
 	const float SHOT_LEFT = -10.0f;
 	bool shot_flag = false;
-	const float SHOT_COOL_TIME = 0.2f;
+	const float SHOT_COOL_TIME = 0.05f;
 	float shot_time = 0.0f;
 	void Shot(){
 			if(Input.GetKey(KeyCode.Space) && !shot_flag){

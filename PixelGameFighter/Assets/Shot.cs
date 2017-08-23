@@ -23,10 +23,10 @@ public class Shot : MonoBehaviour {
 	void Update () {
 		next_pos = this.transform.position;
 		next_pos.y += 10.0f;
-		if(next_pos.x >= game_frame.GameDispWidthR - width/2){ death_flag = true;}
-		else if(next_pos.x <= game_frame.GameDispWidthL + width/2){ death_flag = true; }
-		if(next_pos.y >= game_frame.GameDispHeightU - height/2){ death_flag = true; }
-		else if(next_pos.y <= game_frame.GameDispHeightD + height/2){ death_flag = true; }
+		if(next_pos.x >= game_frame.GameDispWidthR + width){ death_flag = true;}
+		else if(next_pos.x <= game_frame.GameDispWidthL - width){ death_flag = true; }
+		if(next_pos.y >= game_frame.GameDispHeightU + height){ death_flag = true; }
+		else if(next_pos.y <= game_frame.GameDispHeightD - height){ death_flag = true; }
 		if(death_flag)	Destroy(this.gameObject);
 		this.transform.position = next_pos;
 	}

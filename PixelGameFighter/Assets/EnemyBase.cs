@@ -42,6 +42,8 @@ public class EnemyBase : MonoBehaviour {
 					game_mode_data_keeper.Score = game_mode_data_keeper.Score + score;
 					Destroy(this.gameObject);
 				}
+			}else if(col.gameObject.CompareTag("Player")){
+				Destroy(col.gameObject);
 			}
 		}
 	}
