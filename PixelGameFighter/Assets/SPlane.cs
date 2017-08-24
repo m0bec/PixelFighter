@@ -18,7 +18,11 @@ public class SPlane : MonoBehaviour {
 	public float Height{
 		get{return height;}
 	}
-	const float move_speed = 5.0f;
+	float move_speed = 5.0f;
+	public float MoveSpeed{
+		set{move_speed = value;}
+		get{return move_speed;}
+	}
 	// Use this for initialization
 	public virtual void Start () {
 		size = this.transform.position;
