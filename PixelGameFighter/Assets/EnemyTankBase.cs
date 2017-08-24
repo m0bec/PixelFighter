@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBase : MonoBehaviour {
+public class EnemyTankBase : MonoBehaviour {
 	public float hp;
 	public float Hp{
 		get{return hp;}
@@ -19,7 +19,6 @@ public class EnemyBase : MonoBehaviour {
 	}
 
 	GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
-	GameModeSystem game_mode_system;
 	// Use this for initialization
 	public virtual void Start () {
 		
@@ -43,9 +42,6 @@ public class EnemyBase : MonoBehaviour {
 					game_mode_data_keeper.Score = game_mode_data_keeper.Score + score;
 					Destroy(this.gameObject);
 				}
-			}else if(col.gameObject.CompareTag("Player") && !game_mode_data_keeper.PlayerDeathFlag){
-				game_mode_data_keeper.PlayerDeathFlag = true;
-				game_mode_data_keeper.DownPlayerHp();
 			}
 		}
 	}

@@ -55,7 +55,12 @@ public class GamemodeDataKeeper {
     }
     public void AddPlayerHp(){player_hp++;}
     public void DownPlayerHp(){player_hp--;}
+    bool player_death_flag  =false;
+    public bool PlayerDeathFlag{
+        set{player_death_flag = value;}
+        get{return player_death_flag;}
 
+    }
     public bool GameOverJudge(){
         if(player_hp < 0)   return true;
         else{return false;}

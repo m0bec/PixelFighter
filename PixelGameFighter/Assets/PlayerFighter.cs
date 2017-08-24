@@ -22,26 +22,78 @@ public class PlayerFighter : MonoBehaviour {
 	Vector3 next_position;
 	public float width;
 	public float height;
-	Vector3 DEF_START_POS = new Vector3(-54.0f, -300.0f, -10.0f);
+	public Vector3 DEF_START_POS = new Vector3(-54.0f, -300.0f, -10.0f);
 	// Use this for initialization
 	void Start () {
 		fighter = transform.Find("Fighter").gameObject;
 		game_frame = GameObject.Find("GameFrame").GetComponent<GameFrame>();
 		GetObjecSize();
 		this.transform.position = DEF_START_POS;
+		player_state = (int)plaer_state_name.start;
 	}
 	
+	public enum plaer_state_name{
+		normal, start, restart, death
+	}
+	int player_state;
+	public int PlayerState{
+		set{player_state = value;}
+		get{return player_state;}
+	}
 	// Update is called once per frame
 	void Update () {
-		if(game_mode_data_keeper.StartMovieFin){
-			Move();
-			Shot();
-		}else{
-			StartMovie();
+		switch(player_state){
+			case (int)plaer_state_name.start:
+				StartMovie();
+				break;
+
+			case (int)plaer_state_name.restart:
+				RestartMove();
+				break;
+
+			case (int)plaer_state_name.normal:
+				DeathCheck();
+				Move();
+				Shot();
+				break;
+
+			case (int)plaer_state_name.death:
+				Death();
+				break;
 		}
 	}
 
 	public GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
+
+	void Death(){
+		if(this.transform.position != DEF_START_POS)	this.transform.position = DEF_START_POS;
+	}
+
+	void DeathCheck(){
+		if(game_mode_data_keeper.PlayerDeathFlag){
+			if(game_mode_data_keeper.PlayerHp >= 0){
+				player_state = (int)plaer_state_name.restart;
+				SetRestartPos();	
+			}else{
+				player_state = (int)plaer_state_name.death;
+			}
+			game_mode_data_keeper.PlayerDeathFlag = false;
+		}
+	}
+
+	bool restart_flag = false;
+	public bool RestartFlag{
+		set{restart_flag  =value;}
+		get{return restart_flag;}
+	}
+	const float RESTART_MOVE_SPEED  =5.0f;
+	public void SetRestartPos(){this.transform.position = DEF_START_POS;}
+	void RestartMove(){
+		Vector3 str_res_pos = this.transform.position;
+		str_res_pos.y += RESTART_MOVE_SPEED;
+		this.transform.position = str_res_pos;
+		if(str_res_pos.y > bord_go_step_control)	player_state = (int)plaer_state_name.normal;
+	}
 
 	const float bord_go_step_two = 0.0f;
 	const float bord_go_step_three = -150.0f;
@@ -52,7 +104,6 @@ public class PlayerFighter : MonoBehaviour {
 		one, two, three, four
 	}
 	int start_step = (int)start_step_num.one;
-	bool start_step_one = false;
 	Vector3 start_movie_pos;	
 	void StartMovie(){
 		switch(start_step){
@@ -90,7 +141,7 @@ public class PlayerFighter : MonoBehaviour {
 				this.transform.position = start_movie_pos;
 				if(start_movie_pos.y < bord_go_step_control){
 					start_step = (int)start_step_num.one;
-					game_mode_data_keeper.StartMovieFin = true;
+					player_state = (int)plaer_state_name.normal;
 				}
 				break;
 		}
