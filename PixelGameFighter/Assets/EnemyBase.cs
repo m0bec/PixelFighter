@@ -34,6 +34,7 @@ public class EnemyBase : MonoBehaviour {
 	public bool InField{
 		set{in_field = value;}
 	}
+	public GameObject explosion_effect;
 	public void OnTriggerEnter2D(Collider2D col){
 		if(in_field){
 			if(col.gameObject.CompareTag("Bullet")){
@@ -41,6 +42,7 @@ public class EnemyBase : MonoBehaviour {
 				Destroy(col.gameObject);
 				if(hp <= 0){
 					game_mode_data_keeper.Score = game_mode_data_keeper.Score + score;
+					Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
 					Destroy(this.gameObject);
 				}
 			}else if(col.gameObject.CompareTag("Player") && !game_mode_data_keeper.PlayerDeathFlag){
