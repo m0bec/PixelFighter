@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class TankUnder : EnemyTankBase {
 	EnemyMove enemy_move;
+
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
 		enemy_move = GetComponent<EnemyMove>();
 		enemy_move.Width = this.GetComponent<Renderer>().bounds.size.x;
 		enemy_move.Height = this.GetComponent<Renderer>().bounds.size.y;
+		base.SetGameFrame(enemy_move.game_frame);
+		base.ShotSpeed = 100.0f;
+		base.ShotType = (int)EnemyTankBase.enum_shot_type.target_straight;
 		base.Hp = 10.0f;
 		base.Score = 5;
 	}
@@ -17,6 +21,7 @@ public class TankUnder : EnemyTankBase {
 	// Update is called once per frame
 	public override void Update () {
 		base.InField = enemy_move.InField;
+		base.Update();
 	}
 
 	public void SetState(int score_, float hp_){

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMove : MonoBehaviour {
-	GameFrame game_frame;
+	public GameFrame game_frame;
 	// Use this for initialization
 	void Start(){
 		game_frame = GameObject.Find("GameFrame").GetComponent<GameFrame>();

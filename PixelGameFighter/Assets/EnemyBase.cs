@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBase : MonoBehaviour {
+	public List<SEnemyShot> enemy_shot = new List<SEnemyShot>();
+	GameObject player_obj;
+	public void SetPlayerObj(GameObject player_obj_){
+		player_obj = player_obj_;
+	}
 	public float hp;
 	public float Hp{
 		get{return hp;}

@@ -78,7 +78,6 @@ public class PlayerFighter : MonoBehaviour {
 				Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
 				player_state = (int)plaer_state_name.death;
 			}
-			game_mode_data_keeper.PlayerDeathFlag = false;
 		}
 	}
 
@@ -97,7 +96,10 @@ public class PlayerFighter : MonoBehaviour {
 		Vector3 str_res_pos = this.transform.position;
 		str_res_pos.y += RESTART_MOVE_SPEED;
 		this.transform.position = str_res_pos;
-		if(str_res_pos.y > bord_go_step_control)	player_state = (int)plaer_state_name.normal;
+		if(str_res_pos.y > bord_go_step_control){
+			player_state = (int)plaer_state_name.normal;
+			game_mode_data_keeper.PlayerDeathFlag = false;
+		}
 	}
 
 	const float bord_go_step_two = 0.0f;
