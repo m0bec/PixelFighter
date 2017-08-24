@@ -63,7 +63,9 @@ Thumbs.db
 sysinfo.txt #Unity3D Generated File On Crash Reports
 
 
-/PixelFighter/PixeGameFighter/Asset/Graph
+PixelGameFighter/Assets/Graph
+PixelGameFighter/Assets/_Creepy_Cat/
+*.exr
 *.png
 *.asset
 *.meta
@@ -80,3 +82,4 @@ PixelGameFighter/PixelFighter_Data
 *.fbx
 *.tga
 *.prefab
+*.txt

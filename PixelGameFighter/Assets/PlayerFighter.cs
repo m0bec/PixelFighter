@@ -75,6 +75,7 @@ public class PlayerFighter : MonoBehaviour {
 				player_state = (int)plaer_state_name.restart;
 				SetRestartPos();	
 			}else{
+				Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
 				player_state = (int)plaer_state_name.death;
 			}
 			game_mode_data_keeper.PlayerDeathFlag = false;
@@ -87,7 +88,11 @@ public class PlayerFighter : MonoBehaviour {
 		get{return restart_flag;}
 	}
 	const float RESTART_MOVE_SPEED  =5.0f;
-	public void SetRestartPos(){this.transform.position = DEF_START_POS;}
+	public GameObject explosion_effect;
+	public void SetRestartPos(){
+		Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
+		this.transform.position = DEF_START_POS;
+	}
 	void RestartMove(){
 		Vector3 str_res_pos = this.transform.position;
 		str_res_pos.y += RESTART_MOVE_SPEED;
