@@ -44,6 +44,7 @@ public class EnemyBase : MonoBehaviour {
 				}
 			}else if(col.gameObject.CompareTag("Player")){
 				Destroy(col.gameObject);
+				game_mode_data_keeper.DownPlayerHp();
 			}
 		}
 	}

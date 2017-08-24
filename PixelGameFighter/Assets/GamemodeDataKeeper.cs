@@ -18,6 +18,12 @@ public class GamemodeDataKeeper {
         }
     }
 
+    public void SetStart(){
+        score = 0;
+        start_movie_fin = false;
+        player_hp = 2;
+    }
+
     const float PLAYER_FL = -10.0f;
     public float PlayerFL{
         get{return PLAYER_FL;}
@@ -42,4 +48,17 @@ public class GamemodeDataKeeper {
         set{start_movie_fin  =value;}
     }
     
+    int player_hp = 3;
+    public int PlayerHp{
+        set{player_hp = value;}
+        get{return player_hp;}
+    }
+    public void AddPlayerHp(){player_hp++;}
+    public void DownPlayerHp(){player_hp--;}
+
+    public bool GameOverJudge(){
+        if(player_hp < 0)   return true;
+        else{return false;}
+    }
+
 }
