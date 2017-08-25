@@ -36,18 +36,21 @@ public class GameModeOneSystem : MonoBehaviour {
 				time += Time.deltaTime;
 				if(one_step == (int)enum_one_level.one && 
 				time > one_next_game_level[(int)enum_one_level.one]){
-					str_obj = Instantiate(tank, new Vector3(
+					CreateTank(tank, new Vector3(
 						game_frame.GameDispWidthL + tank.GetComponent<EnemyMove>().Width/2 + 100.0f,
 						game_frame.GameDispHeightU + tank.GetComponent<EnemyMove>().Height,
 						game_mode_data_keeper.PlayerFL
-					),
-					Quaternion.identity);
-					str_obj.GetComponent<TankUnder>().SetState(10, 10.0f);
-					str_obj.GetComponent<EnemyMove>().MoveSpeed = 1.0f;
+					), 10, 10.0f, 1.0f);
 					time -= 5.0f;
 				}
 				break;
 		}
+	}
+
+	void CreateTank(GameObject tank_, Vector3 pos_, int score_, float hp_, float move_speed_){
+		str_obj = Instantiate(tank_, pos_, Quaternion.identity);
+		str_obj.GetComponent<TankUnder>().SetState(score_, hp_);
+		str_obj.GetComponent<EnemyMove>().MoveSpeed = move_speed_;
 	}
 
 	void NextScene(){
