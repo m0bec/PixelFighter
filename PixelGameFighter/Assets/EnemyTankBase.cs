@@ -72,12 +72,16 @@ public class EnemyTankBase : MonoBehaviour {
 	public void SetGameFrame(GameFrame game_frame_){
 		game_frame = game_frame_;
 	}
+	float shot_cool_time;
+	public float ShotCoolTime{
+		set{shot_cool_time = value;}
+	}
 	public float time_counter = 0.0f;
 	void ShootShot(){
 		switch(shot_type){
 			case (int)enum_shot_type.target_straight:
 				time_counter += Time.deltaTime;
-				if(time_counter > 1.0f){
+				if(time_counter > shot_cool_time){
 					str_shot_obj = Instantiate(yellow_big_bullet,
 					new Vector3(this.transform.position.x,
 					this.transform.position.y,

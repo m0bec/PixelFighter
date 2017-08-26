@@ -40,16 +40,17 @@ public class GameModeOneSystem : MonoBehaviour {
 						game_frame.GameDispWidthL + tank.GetComponent<EnemyMove>().Width/2 + 100.0f,
 						game_frame.GameDispHeightU + tank.GetComponent<EnemyMove>().Height,
 						game_mode_data_keeper.PlayerFL
-					), 10, 10.0f, 1.0f);
-					time -= 5.0f;
+					), 10, 10.0f, 1.0f, 100.0f, (int)EnemyTankBase.enum_shot_type.target_straight, 1.0f);
+					time = 0.0f;
 				}
 				break;
 		}
 	}
 
-	void CreateTank(GameObject tank_, Vector3 pos_, int score_, float hp_, float move_speed_){
+	void CreateTank(GameObject tank_, Vector3 pos_, int score_, float hp_,
+	 float move_speed_, float shot_speed_, int shot_type_, float shot_cool_time_){
 		str_obj = Instantiate(tank_, pos_, Quaternion.identity);
-		str_obj.GetComponent<TankUnder>().SetState(score_, hp_);
+		str_obj.GetComponent<TankUnder>().SetState(score_, hp_, shot_speed_, shot_type_, shot_cool_time_);
 		str_obj.GetComponent<EnemyMove>().MoveSpeed = move_speed_;
 	}
 
