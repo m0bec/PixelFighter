@@ -21,7 +21,7 @@ public class GameModeOneSystem : MonoBehaviour {
 	}
 	
 	enum game_move_level{
-		one
+		one, two
 	}
 	int game_level = (int)game_move_level.one;
 	float time = 0.0f;
@@ -47,7 +47,19 @@ public class GameModeOneSystem : MonoBehaviour {
 						game_mode_data_keeper.PlayerFL
 					), 10, 10.0f, 1.0f, 100.0f, (int)EnemyTankBase.enum_shot_type.target_straight, 1.0f);
 					one_step = (int)enum_one_level.three;
+				}else if(one_step == (int)enum_one_level.three && time > 20.0f){
+					CreateTank(tank, new Vector3(
+						game_frame.GameDispWidthL + tank.GetComponent<EnemyMove>().Width/2 + 300.0f,
+						game_frame.GameDispHeightU + tank.GetComponent<EnemyMove>().Height,
+						game_mode_data_keeper.PlayerFL
+					), 10, 10.0f, 1.0f, 100.0f, (int)EnemyTankBase.enum_shot_type.target_straight, 1.0f);
+					one_step = (int)enum_one_level.one;
+					game_level = (int)game_move_level.two;
 				}
+				break;
+
+			case (int)game_move_level.two:
+				
 				break;
 		}
 	}
