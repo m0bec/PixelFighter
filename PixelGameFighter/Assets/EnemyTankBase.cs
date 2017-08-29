@@ -49,6 +49,9 @@ public class EnemyTankBase : MonoBehaviour {
 					Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
 					Destroy(this.gameObject);
 				}
+			}else if(col.gameObject.CompareTag("Player") && !game_mode_data_keeper.PlayerDeathFlag && !this.gameObject.CompareTag("Tank")){
+				game_mode_data_keeper.PlayerDeathFlag = true;
+				game_mode_data_keeper.DownPlayerHp();
 			}
 		}
 	}
