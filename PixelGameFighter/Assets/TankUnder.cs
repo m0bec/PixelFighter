@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankUnder : EnemyTankBase {
+public class TankUnder : EnemyBase {
 	EnemyMove enemy_move;
 
 	// Use this for initialization
@@ -14,7 +14,7 @@ public class TankUnder : EnemyTankBase {
 		base.SetGameFrame(enemy_move.game_frame);
 		//以下は後で消す
 		base.ShotSpeed = 100.0f;
-		base.ShotType = (int)EnemyTankBase.enum_shot_type.target_straight;
+		base.ShotType = (int)EnemyBase.enum_shot_type.target_straight;
 		base.Hp = 10.0f;
 		base.Score = 5;
 	}
