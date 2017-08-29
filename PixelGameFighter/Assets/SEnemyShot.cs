@@ -47,10 +47,6 @@ public class SEnemyShot : MonoBehaviour {
 	void CalStraightTarget(){
 		if(!one_time_cal){
 			direction = player_obj.transform.position - this.transform.position;
-			/*direction.z = 0.0f;
-			direction = direction / direction.magnitude;
-			one_time_cal = true;
-			Debug.Log(direction);*/
 			rad = Mathf.Atan2(direction.x, direction.y) - Mathf.PI/2;
 			one_time_cal = true;
 		}
@@ -72,8 +68,10 @@ public class SEnemyShot : MonoBehaviour {
 
 	public void OnTriggerEnter2D(Collider2D col){
 		if(col.gameObject.CompareTag("Player") && !game_mode_data_keeper.PlayerDeathFlag){
+			if(player_obj.GetComponent<PlayerFighter>().PlayerState == (int)PlayerFighter.player_state_name.normal){
 				game_mode_data_keeper.PlayerDeathFlag = true;
 				game_mode_data_keeper.DownPlayerHp();
+			}
 		}
 	}
 

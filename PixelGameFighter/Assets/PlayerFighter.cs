@@ -29,11 +29,11 @@ public class PlayerFighter : MonoBehaviour {
 		game_frame = GameObject.Find("GameFrame").GetComponent<GameFrame>();
 		GetObjecSize();
 		this.transform.position = DEF_START_POS;
-		player_state = (int)plaer_state_name.start;
+		player_state = (int)player_state_name.start;
 	}
 	
-	public enum plaer_state_name{
-		normal, start, restart, death
+	public enum player_state_name{
+		normal, start, restart, death, invalid
 	}
 	int player_state;
 	public int PlayerState{
@@ -43,27 +43,41 @@ public class PlayerFighter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		switch(player_state){
-			case (int)plaer_state_name.start:
+			case (int)player_state_name.start:
 				StartMovie();
 				break;
 
-			case (int)plaer_state_name.restart:
+			case (int)player_state_name.restart:
 				RestartMove();
 				break;
 
-			case (int)plaer_state_name.normal:
+			case (int)player_state_name.normal:
 				DeathCheck();
 				Move();
 				Shot();
+				Bomb();
 				break;
 
-			case (int)plaer_state_name.death:
+			case (int)player_state_name.death:
 				Death();
+				break;
+
+			case (int)player_state_name.invalid:
+				DeathCheck();
+				Move();
+				Shot();
 				break;
 		}
 	}
 
 	public GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
+
+	void Bomb(){
+		//test
+		if(Input.GetKey(KeyCode.F2)){
+			player_state = (int)player_state_name.invalid;
+		}
+	}
 
 	void Death(){
 		if(this.transform.position != DEF_START_POS)	this.transform.position = DEF_START_POS;
@@ -72,11 +86,11 @@ public class PlayerFighter : MonoBehaviour {
 	void DeathCheck(){
 		if(game_mode_data_keeper.PlayerDeathFlag){
 			if(game_mode_data_keeper.PlayerHp >= 0){
-				player_state = (int)plaer_state_name.restart;
+				player_state = (int)player_state_name.restart;
 				SetRestartPos();	
 			}else{
 				Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
-				player_state = (int)plaer_state_name.death;
+				player_state = (int)player_state_name.death;
 			}
 		}
 	}
@@ -97,7 +111,7 @@ public class PlayerFighter : MonoBehaviour {
 		str_res_pos.y += RESTART_MOVE_SPEED;
 		this.transform.position = str_res_pos;
 		if(str_res_pos.y > bord_go_step_control){
-			player_state = (int)plaer_state_name.normal;
+			player_state = (int)player_state_name.normal;
 			game_mode_data_keeper.PlayerDeathFlag = false;
 		}
 	}
@@ -148,7 +162,7 @@ public class PlayerFighter : MonoBehaviour {
 				this.transform.position = start_movie_pos;
 				if(start_movie_pos.y < bord_go_step_control){
 					start_step = (int)start_step_num.one;
-					player_state = (int)plaer_state_name.normal;
+					player_state = (int)player_state_name.normal;
 				}
 				break;
 		}

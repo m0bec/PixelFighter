@@ -50,8 +50,10 @@ public class EnemyBase : MonoBehaviour {
 					Destroy(this.gameObject);
 				}
 			}else if(col.gameObject.CompareTag("Player") && !game_mode_data_keeper.PlayerDeathFlag && !this.gameObject.CompareTag("Tank")){
-				game_mode_data_keeper.PlayerDeathFlag = true;
-				game_mode_data_keeper.DownPlayerHp();
+				if(player_obj.GetComponent<PlayerFighter>().PlayerState == (int)PlayerFighter.player_state_name.normal){
+					game_mode_data_keeper.PlayerDeathFlag = true;
+					game_mode_data_keeper.DownPlayerHp();
+				}
 			}
 		}
 	}
