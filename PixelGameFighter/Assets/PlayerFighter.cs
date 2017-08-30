@@ -23,10 +23,15 @@ public class PlayerFighter : MonoBehaviour {
 	public float width;
 	public float height;
 	public Vector3 DEF_START_POS = new Vector3(-54.0f, -300.0f, -10.0f);
+	public GameObject main_cam;
+	public GameObject gray_cam;
 	// Use this for initialization
 	void Start () {
 		fighter = transform.Find("Fighter").gameObject;
 		game_frame = GameObject.Find("GameFrame").GetComponent<GameFrame>();
+		main_cam = GameObject.Find("MainCamera");
+		gray_cam = GameObject.Find("GrayCamera");
+		//gray_cam.SetActive(false);
 		GetObjecSize();
 		this.transform.position = DEF_START_POS;
 		player_state = (int)player_state_name.start;
@@ -44,14 +49,17 @@ public class PlayerFighter : MonoBehaviour {
 	void Update () {
 		switch(player_state){
 			case (int)player_state_name.start:
+				ChangeMainCom();
 				StartMovie();
 				break;
 
 			case (int)player_state_name.restart:
+				ChangeMainCom();
 				RestartMove();
 				break;
 
 			case (int)player_state_name.normal:
+				ChangeMainCom();
 				DeathCheck();
 				Move();
 				Shot();
@@ -63,6 +71,7 @@ public class PlayerFighter : MonoBehaviour {
 				break;
 
 			case (int)player_state_name.invalid:
+				ChangeGrayCam();
 				DeathCheck();
 				Move();
 				Shot();
@@ -76,6 +85,20 @@ public class PlayerFighter : MonoBehaviour {
 		//test
 		if(Input.GetKey(KeyCode.F2)){
 			player_state = (int)player_state_name.invalid;
+		}
+	}
+
+	void ChangeGrayCam(){
+		if(main_cam.activeSelf){
+			main_cam.SetActive(false);
+			gray_cam.SetActive(true);
+		}
+	}
+
+	void ChangeMainCom(){
+		if(gray_cam.activeSelf){
+			main_cam.SetActive(true);
+			//gray_cam.SetActive(false);
 		}
 	}
 
