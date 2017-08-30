@@ -31,7 +31,6 @@ public class PlayerFighter : MonoBehaviour {
 		game_frame = GameObject.Find("GameFrame").GetComponent<GameFrame>();
 		main_cam = GameObject.Find("MainCamera");
 		gray_cam = GameObject.Find("GrayCamera");
-		//gray_cam.SetActive(false);
 		GetObjecSize();
 		this.transform.position = DEF_START_POS;
 		player_state = (int)player_state_name.start;
@@ -88,17 +87,22 @@ public class PlayerFighter : MonoBehaviour {
 		}
 	}
 
+	float overlay_intensity;
+	const float change_overlay_speed = 0.03f;
 	void ChangeGrayCam(){
-		if(main_cam.activeSelf){
-			main_cam.SetActive(false);
-			gray_cam.SetActive(true);
+		overlay_intensity = main_cam.GetComponent<UnityStandardAssets.ImageEffects.ScreenOverlay>().intensity;
+		if(overlay_intensity < 1.0f - change_overlay_speed){
+			main_cam.GetComponent<UnityStandardAssets.ImageEffects.ScreenOverlay>().intensity += change_overlay_speed;
+		}else{
+			main_cam.GetComponent<UnityStandardAssets.ImageEffects.ScreenOverlay>().intensity = 1.0f;
 		}
 	}
-
 	void ChangeMainCom(){
-		if(gray_cam.activeSelf){
-			main_cam.SetActive(true);
-			//gray_cam.SetActive(false);
+		overlay_intensity = main_cam.GetComponent<UnityStandardAssets.ImageEffects.ScreenOverlay>().intensity;
+		if(overlay_intensity > change_overlay_speed){
+			main_cam.GetComponent<UnityStandardAssets.ImageEffects.ScreenOverlay>().intensity -= change_overlay_speed;
+		}else{
+			main_cam.GetComponent<UnityStandardAssets.ImageEffects.ScreenOverlay>().intensity = 0.0f;
 		}
 	}
 
