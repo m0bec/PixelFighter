@@ -5,8 +5,7 @@ using UnityEngine;
 public class EFighterP : MonoBehaviour {
 	const float ROLL_SPEED = 10.0f;
 	public GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
-	// Use this for initialization
-	
+
 	// Update is called once per frame
 	void Update () {
 		if(!game_mode_data_keeper.Stop){

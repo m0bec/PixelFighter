@@ -12,12 +12,19 @@ public class GameModeSystem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		CreateStopBackGround();
 	}
-	
-	void PlayeDeathSeq(){
-		if(game_mode_data_keeper.PlayerDeathFlag){
-			
+
+	public GameObject stop_background;
+	bool create_stop_background = false;
+	void CreateStopBackGround(){
+		if(!game_mode_data_keeper.Stop){
+			create_stop_background = false;
+		}else{
+			if(!create_stop_background){
+				Instantiate(stop_background, new Vector3(0.0f, 0.0f, -95.0f), Quaternion.identity);
+				create_stop_background = true;
+			}
 		}
 	}
 }
