@@ -21,16 +21,18 @@ public class PlaneOne : SPlane {
 	
 	// Update is called once per frame
 	public override void Update () {
-		base.Update();
-		if(this.transform.position.y < -base.Height/2 + game_frame.Height + margin && !create_flag){
-			Instantiate(
-				this,
-				new Vector3(this.transform.position.x, this.transform.position.y + base.Height, this.transform.position.z),
-				base.Rotate);
-			create_flag = true;
-		}
-		if(this.transform.position.y < -base.Size.y - margin - game_frame.Height){
-			Destroy(this.gameObject);
+		if(!base.CheckStop()){
+			base.Update();
+			if(this.transform.position.y < -base.Height/2 + game_frame.Height + margin && !create_flag){
+				Instantiate(
+					this,
+					new Vector3(this.transform.position.x, this.transform.position.y + base.Height, this.transform.position.z),
+					base.Rotate);
+				create_flag = true;
+			}
+			if(this.transform.position.y < -base.Size.y - margin - game_frame.Height){
+				Destroy(this.gameObject);
+			}
 		}
 	}
 }

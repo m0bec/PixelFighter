@@ -8,9 +8,16 @@ public class EnemyMove : MonoBehaviour {
 	void Start(){
 		game_frame = GameObject.Find("GameFrame").GetComponent<GameFrame>();
 	}
+
+	GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
+	public bool CheckStop(){
+		return game_mode_data_keeper.Stop;
+	}
 	// Update is called once per frame
 	void Update () {
-		Move();
+		if(!CheckStop()){
+			Move();
+		}
 	}
 
 	int move_num;

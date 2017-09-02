@@ -18,6 +18,16 @@ public class GamemodeDataKeeper {
         }
     }
 
+    public void SetDef(){
+        stop = false;
+    }
+    
+    bool stop = false;
+    public bool Stop{
+        set {stop = value;}
+        get {return stop;}
+    }
+
     public void SetStart(){
         score = 0;
         start_movie_fin = false;

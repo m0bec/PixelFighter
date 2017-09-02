@@ -37,7 +37,7 @@ public class PlayerFighter : MonoBehaviour {
 	}
 	
 	public enum player_state_name{
-		normal, start, restart, death, invalid
+		normal, start, restart, death, invalid, stop
 	}
 	int player_state;
 	public int PlayerState{
@@ -58,6 +58,7 @@ public class PlayerFighter : MonoBehaviour {
 				break;
 
 			case (int)player_state_name.normal:
+				Stop();
 				ChangeMainCom();
 				DeathCheck();
 				Move();
@@ -75,10 +76,21 @@ public class PlayerFighter : MonoBehaviour {
 				Move();
 				Shot();
 				break;
+
+			case (int)player_state_name.stop:
+
+				break;
 		}
 	}
 
 	public GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
+
+	void Stop(){
+		if(Input.GetKey(KeyCode.C)){
+			player_state = (int)player_state_name.stop;
+			game_mode_data_keeper.Stop = true;
+		}
+	}
 
 	void Bomb(){
 		//test

@@ -23,6 +23,10 @@ public class EnemyBase : MonoBehaviour {
 	}
 
 	GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
+	public bool CheckStop(){
+		return game_mode_data_keeper.Stop;
+	}
+
 	// Use this for initialization
 	public virtual void Start () {
 		player_obj = GameObject.Find("PlayerFighter");
@@ -30,8 +34,10 @@ public class EnemyBase : MonoBehaviour {
 	
 	// Update is called once per frame
 	public virtual void Update () {
-		CheckEnemyShotQue();
-		ShootShot();
+		if(!CheckStop()){
+			CheckEnemyShotQue();
+			ShootShot();
+		}
 	}
 	
 	bool in_field;
@@ -112,7 +118,6 @@ public class EnemyBase : MonoBehaviour {
 					str_enemy_shot.BulletPattern = (int)SEnemyShot.bullet_enum.straight_target;
 					str_enemy_shot.SetGameDispSpace(game_frame.GameDispWidthL,game_frame.GameDispWidthR,
 					game_frame.GameDispHeightU, game_frame.GameDispHeightD);
-
 					//生成した弾を管理
 					enemy_shot_que.Enqueue(str_enemy_shot);
 					time_counter = 0.0f;

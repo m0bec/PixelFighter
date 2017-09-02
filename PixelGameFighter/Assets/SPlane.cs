@@ -31,6 +31,11 @@ public class SPlane : MonoBehaviour {
 		rotate = this.transform.rotation;
 	}
 	
+	public GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
+	public bool CheckStop(){
+		return game_mode_data_keeper.Stop;
+	}
+
 	// Update is called once per frame
 	public virtual void Update () {
 		transform.position -= new Vector3(0.0f, move_speed, 0.0f);

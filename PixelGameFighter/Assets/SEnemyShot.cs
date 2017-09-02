@@ -5,6 +5,10 @@ using UnityEngine;
 public class SEnemyShot : MonoBehaviour {
 	public const float BULLET_HEIGHT = -80.0f;
 	GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
+	public bool CheckStop(){
+		return game_mode_data_keeper.Stop;
+	}
+
 	GameObject player_obj;
 	public void SetPlayerObj(GameObject player_obj_){
 		player_obj = player_obj_;
@@ -25,8 +29,11 @@ public class SEnemyShot : MonoBehaviour {
 	Vector3 this_pos;
 	// Update is called once per frame
 	void Update () {
-		BulletMove();
+		if(!CheckStop()){
+			BulletMove();
+		}
 	}
+
 	public enum bullet_enum{
 		straight_target
 	}

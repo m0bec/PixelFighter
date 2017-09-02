@@ -16,8 +16,10 @@ public class GameModeOneSystem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GameMoveLevel();
-		NextScene();
+		if(!game_mode_data_keeper.Stop){
+			GameMoveLevel();
+			NextScene();
+		}
 	}
 	
 	enum game_move_level{
