@@ -18,20 +18,18 @@ public class GamemodeDataKeeper {
         }
     }
 
+    const int PLAYER_HP_DEF = 3;
     public void SetDef(){
         stop = false;
+        score = 0;
+        start_movie_fin = false;
+        player_hp = PLAYER_HP_DEF;
     }
     
     bool stop = false;
     public bool Stop{
         set {stop = value;}
         get {return stop;}
-    }
-
-    public void SetStart(){
-        score = 0;
-        start_movie_fin = false;
-        player_hp = 2;
     }
 
     const float PLAYER_FL = -10.0f;
@@ -58,7 +56,7 @@ public class GamemodeDataKeeper {
         set{start_movie_fin  =value;}
     }
     
-    int player_hp = 3;
+    int player_hp = PLAYER_HP_DEF;
     public int PlayerHp{
         set{player_hp = value;}
         get{return player_hp;}

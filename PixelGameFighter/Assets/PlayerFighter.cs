@@ -26,7 +26,7 @@ public class PlayerFighter : MonoBehaviour {
 	public GameObject main_cam;
 	public GameObject gray_cam;
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 		fighter = transform.Find("Fighter").gameObject;
 		game_frame = GameObject.Find("GameFrame").GetComponent<GameFrame>();
 		main_cam = GameObject.Find("MainCamera");
@@ -78,7 +78,9 @@ public class PlayerFighter : MonoBehaviour {
 				break;
 
 			case (int)player_state_name.stop:
-
+				if(!game_mode_data_keeper.Stop){
+					player_state = (int)player_state_name.normal;
+				}
 				break;
 		}
 	}

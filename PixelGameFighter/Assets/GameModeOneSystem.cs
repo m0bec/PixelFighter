@@ -12,6 +12,7 @@ public class GameModeOneSystem : MonoBehaviour {
 	void Start () {
 		game_frame = GameObject.Find("GameFrame").GetComponent<GameFrame>();
 		player_obj = GameObject.Find("PlayerFighter");
+		player_obj.GetComponent<PlayerFighter>().Start();
 	}
 	
 	// Update is called once per frame

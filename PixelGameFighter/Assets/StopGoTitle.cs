@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class StopContinueText : SText {
+public class StopGoTitle : SText {
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
 		this.GetComponent<Text>().text = "";
-		base.SetStateNum((int)StopSystem.StateName.Cont);
+		base.SetStateNum((int)StopSystem.StateName.Exit);
 	}
 
 	public GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
@@ -17,7 +18,7 @@ public class StopContinueText : SText {
 	public override void Update () {
 		if(game_mode_data_keeper.Stop){
 			base.Update();
-			this.GetComponent<Text>().text = "ゲームを続ける";
+			this.GetComponent<Text>().text = "タイトルに戻る";
 			if(base.GetStateNum() == base.stop_system.MenueState){
 				this.GetComponent<Text>().color = base.select_stop_color;
 				SelectAction();
@@ -31,7 +32,8 @@ public class StopContinueText : SText {
 
 	void SelectAction(){
 		if(Input.GetKeyDown(KeyCode.Return)){
-				game_mode_data_keeper.Stop = false;
+				game_mode_data_keeper.SetDef();
+				SceneManager.LoadScene("StartMenueScene");
 		}
 	}
 }
