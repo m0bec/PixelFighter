@@ -19,10 +19,10 @@ public class StopContinueText : SText {
 			base.Update();
 			this.GetComponent<Text>().text = "ゲームを続ける";
 			if(base.GetStateNum() == base.stop_system.MenueState){
-				this.GetComponent<Text>().color = base.select_color;
+				this.GetComponent<Text>().color = base.select_stop_color;
 				SelectAction();
 			}else{
-				this.GetComponent<Text>().color = base.not_select_color;
+				this.GetComponent<Text>().color = base.not_select_stop_color;
 			}
 		}else{
 			this.GetComponent<Text>().text = "";

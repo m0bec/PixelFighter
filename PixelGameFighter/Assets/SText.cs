@@ -10,6 +10,8 @@ public class SText : MonoBehaviour {
 
 	public Color select_color = new Color(0f / 255f, 0f / 255f, 0f / 255f);
 	public Color not_select_color = new Color(96f / 255f, 88f / 255f, 88f / 255f);
+	public Color select_stop_color = new Color(255f / 255f, 255f / 255f, 255f / 255f);
+	public Color not_select_stop_color = new Color(171f / 255f, 161f / 255f, 161f / 255f);
 	// Use this for initialization
 	public virtual void Start () {
 		if(this.gameObject.transform.tag == "TitleText"){
@@ -23,8 +25,6 @@ public class SText : MonoBehaviour {
 	public virtual void Update () {
 		if(this.gameObject.transform.tag == "TitleText"){
 			select_menue_system  = start_menue_system.GetComponent<SelectMenueState>();
-		}else if(this.gameObject.transform.tag == "StopMenue"){
-			
 		}
 	}
 
