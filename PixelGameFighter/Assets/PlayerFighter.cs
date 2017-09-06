@@ -37,7 +37,7 @@ public class PlayerFighter : MonoBehaviour {
 	}
 	
 	public enum player_state_name{
-		normal, start, restart, death, invalid, stop
+		normal, start, restart, death, invalid, stop, restart_invalid
 	}
 	int player_state;
 	public int PlayerState{
@@ -82,6 +82,12 @@ public class PlayerFighter : MonoBehaviour {
 				if(!game_mode_data_keeper.Stop){
 					player_state = (int)player_state_name.normal;
 				}
+				break;
+
+			case (int)player_state_name.restart_invalid:
+				Stop();
+				RestartInvalid();
+				Shot();
 				break;
 		}
 	}
@@ -138,14 +144,13 @@ public class PlayerFighter : MonoBehaviour {
 		}
 	}
 
-	const float RESTART_INVALID_TIME = 2.0f;
-	float count_restart_time = 0.0f;
+	
 	bool restart_flag = false;
 	public bool RestartFlag{
 		set{restart_flag  =value;}
 		get{return restart_flag;}
 	}
-	const float RESTART_MOVE_SPEED  =5.0f;
+	const float RESTART_MOVE_SPEED = 5.0f;
 	public GameObject explosion_effect;
 	public void SetRestartPos(){
 		Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
@@ -154,17 +159,23 @@ public class PlayerFighter : MonoBehaviour {
 	void RestartMove(){
 		Vector3 str_res_pos = this.transform.position;
 		if(str_res_pos.y > bord_go_step_control){
-			count_restart_time += Time.deltaTime;
-			Move();
-			if(count_restart_time > RESTART_INVALID_TIME){
-				player_state = (int)player_state_name.normal;
-				count_restart_time = 0.0f;
-				game_mode_data_keeper.PlayerDeathFlag = false;
-			}	
+			player_state = (int)player_state_name.restart_invalid;
 		}else{
 			str_res_pos.y += RESTART_MOVE_SPEED;
 			this.transform.position = str_res_pos;
 		}
+	}
+
+	const float RESTART_INVALID_TIME = 2.0f;
+	float count_restart_time = 0.0f;
+	void RestartInvalid(){
+		count_restart_time += Time.deltaTime;
+		Move();
+		if(count_restart_time > RESTART_INVALID_TIME){
+			player_state = (int)player_state_name.normal;
+			count_restart_time = 0.0f;
+			game_mode_data_keeper.PlayerDeathFlag = false;
+		}	
 	}
 
 	const float bord_go_step_two = 0.0f;

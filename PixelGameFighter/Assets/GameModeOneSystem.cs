@@ -13,13 +13,19 @@ public class GameModeOneSystem : MonoBehaviour {
 		game_frame = GameObject.Find("GameFrame").GetComponent<GameFrame>();
 		player_obj = GameObject.Find("PlayerFighter");
 		player_obj.GetComponent<PlayerFighter>().Start();
+		game_over_graph_create = false;
+		game_over_graph = GameObject.Find("GameOver");
+		game_over_graph.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(!game_mode_data_keeper.Stop){
+		if(!game_mode_data_keeper.Stop && !game_mode_data_keeper.GameOverJudge()){
 			GameMoveLevel();
 			NextScene();
+		}
+		if(game_mode_data_keeper.GameOverJudge()){
+			GameOverAction();
 		}
 	}
 	
@@ -67,6 +73,16 @@ public class GameModeOneSystem : MonoBehaviour {
 		}
 	}
 
+	//基底クラスに移動予定
+	GameObject game_over_graph;
+	bool game_over_graph_create = false;
+	void GameOverAction(){
+		if(!game_over_graph_create){
+			game_over_graph.SetActive(true);
+			game_over_graph_create = true;
+		}
+	}
+
 	void CreateTank(GameObject tank_, Vector3 pos_, int score_, float hp_,
 	 float move_speed_, float shot_speed_, int shot_type_, float shot_cool_time_){
 		str_obj = Instantiate(tank_, pos_, Quaternion.identity);
@@ -86,4 +102,5 @@ public class GameModeOneSystem : MonoBehaviour {
 			SceneManager.LoadScene("GameModeTwo");
 		}
 	}
+	//
 }
