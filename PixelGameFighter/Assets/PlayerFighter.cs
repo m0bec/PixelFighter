@@ -53,6 +53,7 @@ public class PlayerFighter : MonoBehaviour {
 				break;
 
 			case (int)player_state_name.restart:
+				Stop();
 				ChangeMainCom();
 				RestartMove();
 				break;
@@ -99,6 +100,7 @@ public class PlayerFighter : MonoBehaviour {
 		if(Input.GetKey(KeyCode.F2)){
 			player_state = (int)player_state_name.invalid;
 		}
+		//
 	}
 
 	float overlay_intensity;
@@ -136,6 +138,8 @@ public class PlayerFighter : MonoBehaviour {
 		}
 	}
 
+	const float RESTART_INVALID_TIME = 2.0f;
+	float count_restart_time = 0.0f;
 	bool restart_flag = false;
 	public bool RestartFlag{
 		set{restart_flag  =value;}
@@ -149,11 +153,17 @@ public class PlayerFighter : MonoBehaviour {
 	}
 	void RestartMove(){
 		Vector3 str_res_pos = this.transform.position;
-		str_res_pos.y += RESTART_MOVE_SPEED;
-		this.transform.position = str_res_pos;
 		if(str_res_pos.y > bord_go_step_control){
-			player_state = (int)player_state_name.normal;
-			game_mode_data_keeper.PlayerDeathFlag = false;
+			count_restart_time += Time.deltaTime;
+			Move();
+			if(count_restart_time > RESTART_INVALID_TIME){
+				player_state = (int)player_state_name.normal;
+				count_restart_time = 0.0f;
+				game_mode_data_keeper.PlayerDeathFlag = false;
+			}	
+		}else{
+			str_res_pos.y += RESTART_MOVE_SPEED;
+			this.transform.position = str_res_pos;
 		}
 	}
 
