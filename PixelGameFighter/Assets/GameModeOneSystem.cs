@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameModeOneSystem : MonoBehaviour {
 	public GameObject et_box, et_fighter_g, tank;
@@ -14,8 +15,9 @@ public class GameModeOneSystem : MonoBehaviour {
 		player_obj = GameObject.Find("PlayerFighter");
 		player_obj.GetComponent<PlayerFighter>().Start();
 		game_over_graph_create = false;
-		game_over_graph = GameObject.Find("GameOver");
-		game_over_graph.SetActive(false);
+		game_over_graph_right = GameObject.Find("GameOverRight");
+		game_over_graph_left = GameObject.Find("GameOverLeft");
+		gameover_text = GameObject.Find("GameOverText");
 	}
 	
 	// Update is called once per frame
@@ -74,12 +76,48 @@ public class GameModeOneSystem : MonoBehaviour {
 	}
 
 	//基底クラスに移動予定
-	GameObject game_over_graph;
+	GameObject game_over_graph_right;
+	GameObject game_over_graph_left;
+	GameObject gameover_text;
+	const float GAMEOVER_RIGHT_POS = 109.75f;
+	const float GAMEOVER_LEFT_POS = -109.75f;
+	const float GAMEOVER_GRAPH_MOVE_SPEED = 5.0f;
+	bool game_over_image_right_posset = false;
+	bool game_over_image_left_posset = false;
 	bool game_over_graph_create = false;
+	const float GAMEOVER_TEXT_SET_TIME = 2.0f;
+		float gameover_text_time = GAMEOVER_TEXT_SET_TIME;
+	string gameover_text_base = "GAME OVER";
+	int gameover_text_base_num = 0;
+	
 	void GameOverAction(){
-		if(!game_over_graph_create){
-			game_over_graph.SetActive(true);
-			game_over_graph_create = true;
+		Vector3 pos_r = game_over_graph_right.GetComponent<RectTransform>().localPosition;
+		Vector3 pos_l = game_over_graph_left.GetComponent<RectTransform>().localPosition;
+		if(pos_r.x > GAMEOVER_RIGHT_POS + GAMEOVER_GRAPH_MOVE_SPEED){
+			pos_r.x -= GAMEOVER_GRAPH_MOVE_SPEED;
+			game_over_graph_right.GetComponent<RectTransform>().localPosition = pos_r;
+		}else{
+			pos_r.x = GAMEOVER_RIGHT_POS;
+			game_over_graph_right.GetComponent<RectTransform>().localPosition = pos_r;
+			game_over_image_right_posset = true;
+		}
+		if(pos_l.x <= GAMEOVER_LEFT_POS - GAMEOVER_GRAPH_MOVE_SPEED){
+			pos_l.x += GAMEOVER_GRAPH_MOVE_SPEED;
+			game_over_graph_left.GetComponent<RectTransform>().localPosition = pos_l;
+		}else{
+			pos_l.x = GAMEOVER_LEFT_POS;
+			game_over_graph_left.GetComponent<RectTransform>().localPosition = pos_l;
+			game_over_image_left_posset = true;
+		}
+
+		if(game_over_image_left_posset && game_over_image_right_posset){
+			if(gameover_text_base_num < gameover_text_base.Length){
+				gameover_text_time += Time.deltaTime;
+				if(gameover_text_time > GAMEOVER_TEXT_SET_TIME){
+					gameover_text.GetComponent<Text>().text += gameover_text_base[gameover_text_base_num];
+					gameover_text_base_num++;
+				}
+			}
 		}
 	}
 
