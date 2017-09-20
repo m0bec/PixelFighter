@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameModeOneSystem : MonoBehaviour {
-	public GameObject et_box, et_fighter_g, tank;
+	public GameObject et_box, et_fighter_g, tank, et_fighter_r;
 	public GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
 	GameFrame game_frame;
 	GameObject player_obj;
@@ -46,8 +46,8 @@ public class GameModeOneSystem : MonoBehaviour {
 			case (int)game_move_level.one:
 				if(one_step == (int)enum_one_level.one && time > 10.0f) {
 					CreateEFighter(et_fighter_g, new Vector3(
-						game_frame.GameDispWidthL + tank.GetComponent<EnemyMove>().Width/2 + 100.0f,
-						game_frame.GameDispHeightU + tank.GetComponent<EnemyMove>().Height,
+						game_frame.GameDispWidthL +  et_fighter_g.GetComponent<EnemyMove>().Width/2 + 100.0f,
+						game_frame.GameDispHeightU +  et_fighter_g.GetComponent<EnemyMove>().Height,
 						game_mode_data_keeper.PlayerFL
 					), 10, 10.0f, 1.0f, 100.0f, (int)EnemyBase.enum_shot_type.target_straight, 1.0f);
 					one_step = (int)enum_one_level.two;
@@ -64,7 +64,14 @@ public class GameModeOneSystem : MonoBehaviour {
 						game_frame.GameDispHeightU + tank.GetComponent<EnemyMove>().Height,
 						game_mode_data_keeper.PlayerFL
 					), 10, 10.0f, 1.0f, 100.0f, (int)EnemyBase.enum_shot_type.target_straight, 1.0f);
-					one_step = (int)enum_one_level.one;
+					one_step = (int)enum_one_level.four;
+				}else if(one_step == (int)enum_one_level.four && time > 25.0f){
+					CreateEFighterR(et_fighter_r, new Vector3(
+						game_frame.GameDispWidthL +  et_fighter_g.GetComponent<EnemyMove>().Width/2 + 100.0f,
+						game_frame.GameDispHeightU +  et_fighter_g.GetComponent<EnemyMove>().Height,
+						game_mode_data_keeper.PlayerFL
+					), 10, 10.0f, 1.0f, 100.0f, (int)EnemyBase.enum_shot_type.target_straight, 1.0f);
+					one_step = (int)enum_one_level.five;
 					game_level = (int)game_move_level.two;
 				}
 				break;
@@ -132,6 +139,13 @@ public class GameModeOneSystem : MonoBehaviour {
 	 float move_speed_, float shot_speed_, int shot_type_, float shot_cool_time_){
 		str_obj = Instantiate(fighter_, pos_, Quaternion.identity);
 		str_obj.GetComponent<ETFighterG>().SetState(score_, hp_, shot_speed_, shot_type_, shot_cool_time_);
+		str_obj.GetComponent<EnemyMove>().MoveSpeed = move_speed_;
+	}
+
+	void CreateEFighterR(GameObject fighter_, Vector3 pos_, int score_, float hp_,
+	 float move_speed_, float shot_speed_, int shot_type_, float shot_cool_time_){
+		str_obj = Instantiate(fighter_, pos_, Quaternion.identity);
+		str_obj.GetComponent<ETFighterR>().SetState(score_, hp_, shot_speed_, shot_type_, shot_cool_time_);
 		str_obj.GetComponent<EnemyMove>().MoveSpeed = move_speed_;
 	}
 
