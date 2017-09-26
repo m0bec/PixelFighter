@@ -5,6 +5,8 @@ using UnityEngine;
 public class TankUnder : EnemyBase {
 	EnemyMove enemy_move;
 
+	public float scrol_speed;
+
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
@@ -19,19 +21,24 @@ public class TankUnder : EnemyBase {
 		base.Score = 5;
 	}
 	
+	Vector3 pos;
 	// Update is called once per frame
 	public override void Update () {
 		base.InField = enemy_move.InField;
 		base.Update();
+		pos = this.transform.position;
+		pos.y -= scrol_speed;
+		this.transform.position = pos;
 	}
 
 	public void SetState(int score_, float hp_, float shot_speed_,
-	 int shot_type_, float shot_cool_time_){
+	 int shot_type_, float shot_cool_time_, float scrol_speed_){
 		base.Score = score_;
 		base.Hp = hp_;
 		base.ShotSpeed = shot_speed_;
 		base.ShotType = shot_type_;
 		base.ShotCoolTime = shot_cool_time_;
+		scrol_speed = scrol_speed_;
 	}
 
 	public float GetWidth(){return enemy_move.Width;}

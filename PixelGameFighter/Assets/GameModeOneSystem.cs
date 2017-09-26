@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameModeOneSystem : MonoBehaviour {
 	public GameObject et_box, et_fighter_g, tank, et_fighter_r;
 	public GamemodeDataKeeper game_mode_data_keeper = GamemodeDataKeeper.Instance;
+	public GameObject plane_one;
 	GameFrame game_frame;
 	GameObject player_obj;
 	// Use this for initialization
@@ -18,6 +19,7 @@ public class GameModeOneSystem : MonoBehaviour {
 		game_over_graph_right = GameObject.Find("GameOverRight");
 		game_over_graph_left = GameObject.Find("GameOverLeft");
 		gameover_text = GameObject.Find("GameOverText");
+		plane_one = GameObject.Find("PlaneOne");
 	}
 	
 	// Update is called once per frame
@@ -56,14 +58,16 @@ public class GameModeOneSystem : MonoBehaviour {
 						game_frame.GameDispWidthL + tank.GetComponent<EnemyMove>().Width/2 + 200.0f,
 						game_frame.GameDispHeightU + tank.GetComponent<EnemyMove>().Height,
 						game_mode_data_keeper.PlayerFL
-					), 10, 10.0f, 1.0f, 100.0f, (int)EnemyBase.enum_shot_type.target_straight, 1.0f);
+					), 10, 10.0f, 0f, 100.0f, (int)EnemyBase.enum_shot_type.target_straight, 1.0f,
+					plane_one.GetComponent<PlaneOne>().MoveSpeed);
 					one_step = (int)enum_one_level.three;
 				}else if(one_step == (int)enum_one_level.three && time > 20.0f){
 					CreateTank(tank, new Vector3(
 						game_frame.GameDispWidthL + tank.GetComponent<EnemyMove>().Width/2 + 300.0f,
 						game_frame.GameDispHeightU + tank.GetComponent<EnemyMove>().Height,
 						game_mode_data_keeper.PlayerFL
-					), 10, 10.0f, 1.0f, 100.0f, (int)EnemyBase.enum_shot_type.target_straight, 1.0f);
+					), 10, 10.0f, 0f, 100.0f, (int)EnemyBase.enum_shot_type.target_straight, 1.0f,
+					plane_one.GetComponent<PlaneOne>().MoveSpeed);
 					one_step = (int)enum_one_level.four;
 				}else if(one_step == (int)enum_one_level.four && time > 25.0f){
 					CreateEFighterR(et_fighter_r, new Vector3(
@@ -129,9 +133,9 @@ public class GameModeOneSystem : MonoBehaviour {
 	}
 
 	void CreateTank(GameObject tank_, Vector3 pos_, int score_, float hp_,
-	 float move_speed_, float shot_speed_, int shot_type_, float shot_cool_time_){
+	 float move_speed_, float shot_speed_, int shot_type_, float shot_cool_time_, float scrol_speed_){
 		str_obj = Instantiate(tank_, pos_, Quaternion.identity);
-		str_obj.GetComponent<TankUnder>().SetState(score_, hp_, shot_speed_, shot_type_, shot_cool_time_);
+		str_obj.GetComponent<TankUnder>().SetState(score_, hp_, shot_speed_, shot_type_, shot_cool_time_, scrol_speed_);
 		str_obj.GetComponent<EnemyMove>().MoveSpeed = move_speed_;
 	}
 

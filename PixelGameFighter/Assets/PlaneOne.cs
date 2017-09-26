@@ -10,7 +10,8 @@ public class PlaneOne : SPlane {
 	public Vector3 ThisPlaneSize{
 		get{return this_plane_size;}
 	}
-	const float MOVE_SPEED = 2.0f;
+
+	public const float MOVE_SPEED = 2.0f;
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
